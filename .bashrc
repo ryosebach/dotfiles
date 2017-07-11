@@ -130,7 +130,17 @@ unity () {
 		project_path="`pwd`"
 	fi
 	echo "unity open project : ${project_path}"
-	/Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath "${project_path}" &
+	local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
+	/Applications/$unity/$unity.app/Contents/MacOS/Unity -projectPath "${project_path}" &
+}
+
+unirepo () {
+	local dir="$(ghq list | peco)"
+	if [ ! -z "$dir" ] ; then
+		local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
+		/Applications/$unity/$unity.app/Contents/MacOS/Unity -projectPath "$(ghq root)/$dir" &
+	fi
+
 }
 
 # repositoryにcdする．escで抜けた時は移動しないように
