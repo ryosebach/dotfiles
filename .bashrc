@@ -173,3 +173,21 @@ function peco-find-all() {
 }
 bind -x '"\C-uc": peco-find'
 bind -x '"\C-ua": peco-find-all'
+
+##################
+## init project ##
+##################
+
+init-unity-proj() {
+	if [ $# -ge 1 ] ; then
+		local projectName=$1
+		local path="github.com/ryosebach"
+		local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
+		/Applications/$unity/$unity.app/Contents/MacOS/Unity -quit -createProject "$(ghq root)/$path/$projectName"
+		local dir=`pwd`
+		cd "$(ghq root)/$path/$projectName/"
+		git init
+		gibo macos unity >> .gitignore
+		cd "$dir"
+	fi
+}
