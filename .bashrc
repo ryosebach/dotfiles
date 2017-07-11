@@ -85,11 +85,6 @@ alias ll='ls -l'
 alias la='ls -la'
 alias up='cd ..; ls -l'
 
-cdls ()
-{
-	\cd "$@" && ll
-}
-alias cdl='cdls'
 
 ###########
 #GUI*CUI
@@ -109,17 +104,6 @@ cdf () {
   fi
 }
 
-#cd to the path of the grep matching
-jj () {
-	if [ $1 ]; then
-		JUMPDIR=$(find . -type d -maxdepth 1 | grep $1 | tail -1)
-		if [[ -d $JUMPDIR && -n $JUMPDIR ]]; then
-			cd $JUMPDIR
-		else
-			echo "directory not found"
-		fi
-	fi
-}
 
 # peco-cd
 peco-lscd () {
