@@ -105,9 +105,13 @@ cdf () {
 }
 
 
+###########
+##  peco ##
+###########
+
 # peco-cd
 peco-lscd () {
-	local dir="$( find . -maxdepth 5 -type d | sed -e 's;\./;;' | peco )"
+	local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco )"
 	if [ ! -z "$dir" ] ; then
 		cd "$dir"
 	fi
@@ -128,3 +132,34 @@ unity () {
 	echo "unity open project : ${project_path}"
 	/Applications/Unity/Unity.app/Contents/MacOS/Unity -projectPath "${project_path}" &
 }
+
+# repositoryにcdする．escで抜けた時は移動しないように
+function pcd {
+	local dir="$(ghq list | peco)"
+	if [ ! -z "$dir" ] ; then
+		cd "$(ghq root)/$dir"
+	fi
+}
+alias g='pcd'
+
+peco-select-history() {
+	declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
+	READLINE_LINE="$l"
+	READLINE_POINT=${#l}
+}
+bind -x '"\C-r": peco-select-history'
+
+
+# search current directory
+peco-find() {
+	local l=$(\find . -maxdepth 8 -a \! -regex '.*/\..*' | peco)
+	READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${l}${READLINE_LINE:$READLINE_POINT}"
+	READLINE_POINT=$(($READLINE_POINT + ${#l}))
+}
+function peco-find-all() {
+	local l=$(\find . -maxdepth 8 | peco)
+	READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}${l}${READLINE_LINE:$READLINE_POINT}"
+	READLINE_POINT=$(($READLINE_POINT + ${#l}))
+}
+bind -x '"\C-uc": peco-find'
+bind -x '"\C-ua": peco-find-all'
