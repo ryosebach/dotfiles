@@ -87,6 +87,13 @@ alias up='cd ..; ls -l'
 
 
 ###########
+# Desktop #
+###########
+
+alias fucking-desktop='defaults write com.apple.finder CreateDesktop -boolean false; killall Finder;'
+alias sorry-desktop='defaults delete com.apple.finder CreateDesktop; killall Finder;'
+
+###########
 #GUI*CUI
 ###########
 
