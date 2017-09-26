@@ -182,6 +182,16 @@ function peco-find-all() {
 bind -x '"\C-uc": peco-find'
 bind -x '"\C-ua": peco-find-all'
 
+peco-sshconfig-ssh() {
+    local host=$(grep 'Host ' ~/.ssh/config | awk '{print $2}' | peco)
+    if [ -n "$host" ]; then
+        echo "ssh -F ~/.ssh/config $host"
+        ssh -F ~/.ssh/config $host
+    fi
+}
+
+alias sshpeco='peco-sshconfig-ssh'
+
 ##################
 ## init project ##
 ##################
