@@ -1,7 +1,7 @@
-### https://raw.github.com/github/gitignore/8edb8a95c4c4b3dce71a378aaaf89275510b9cef/Global/macos.gitignore
+### https://raw.github.com/github/gitignore/7792e50daeaa6c07460484704671d1dc9f0045a7/Global/macos.gitignore
 
 # General
-*.DS_Store
+.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -26,5 +26,31 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+### https://raw.github.com/github/gitignore/7792e50daeaa6c07460484704671d1dc9f0045a7/Global/windows.gitignore
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
 
 
