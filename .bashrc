@@ -201,13 +201,14 @@ init-unity-proj() {
 		local projectName=$1
 		local path="github.com/ryosebach"
 		local projPath="$(ghq root)/$path/$projectName"
+		local nowDir=`pwd`
 		local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
-		/Applications/$unity/$unity.app/Contents/MacOS/Unity -batchmode -quit -createProject "$(ghq root)/$path/$projectName" >/dev/null 2>&1 &
-		git init "$(ghq root)/$path/$projectName/"
-		gibo macos unity >> "$(ghq root)/$path/$projectName/.gitignore"
-		mkdir "$projPath/.github"
-		wget https://raw.githubusercontent.com/ryosebach/github_template/master/.github/ISSUE_TEMPLATE.md -P "$projPath/.github" >/dev/null 2>&1 &
-		wget https://raw.githubusercontent.com/ryosebach/github_template/master/.github/PULL_REQUEST_TEMPLATE.md -P "$projPath/.github" >/dev/null 2>&1 &
+		/Applications/$unity/$unity.app/Contents/MacOS/Unity -batchmode -quit -createProject "$(ghq root)/$path/$projectName"
+		cd "$projPath"
+		git init
+		gibo macos unity >> .gitignore
+		curl -L raw.github.com/ryosebach/github_template/master/get_template.sh | bash
+		cd "$nowDir"
 		echo "created $projectName"
 	fi
 }
