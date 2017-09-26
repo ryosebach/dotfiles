@@ -138,14 +138,14 @@ unity () {
 	fi
 	echo "unity open project : ${project_path}"
 	local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
-	/Applications/$unity/$unity.app/Contents/MacOS/Unity -projectPath "${project_path}" &
+	/Applications/$unity/$unity.app/Contents/MacOS/Unity -projectPath "${project_path}" >/dev/null 2>&1 &
 }
 
 unirepo () {
 	local dir="$(ghq list | peco)"
 	if [ ! -z "$dir" ] ; then
 		local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
-		/Applications/$unity/$unity.app/Contents/MacOS/Unity -projectPath "$(ghq root)/$dir" &
+		/Applications/$unity/$unity.app/Contents/MacOS/Unity -projectPath "$(ghq root)/$dir" >/dev/null 2>&1 &
 	fi
 
 }
@@ -189,12 +189,14 @@ init-unity-proj() {
 	if [ $# -ge 1 ] ; then
 		local projectName=$1
 		local path="github.com/ryosebach"
+		local projPath="$(ghq root)/$path/$projectName"
 		local unity="$(ls -lr1 /Applications/ | grep Unity | peco)"
-		/Applications/$unity/$unity.app/Contents/MacOS/Unity -quit -createProject "$(ghq root)/$path/$projectName"
-		local dir=`pwd`
-		cd "$(ghq root)/$path/$projectName/"
-		git init
-		gibo macos unity >> .gitignore
-		cd "$dir"
+		/Applications/$unity/$unity.app/Contents/MacOS/Unity -batchmode -quit -createProject "$(ghq root)/$path/$projectName" >/dev/null 2>&1 &
+		git init "$(ghq root)/$path/$projectName/"
+		gibo macos unity >> "$(ghq root)/$path/$projectName/.gitignore"
+		mkdir "$projPath/.github"
+		wget https://raw.githubusercontent.com/ryosebach/github_template/master/.github/ISSUE_TEMPLATE.md -P "$projPath/.github" >/dev/null 2>&1 &
+		wget https://raw.githubusercontent.com/ryosebach/github_template/master/.github/PULL_REQUEST_TEMPLATE.md -P "$projPath/.github" >/dev/null 2>&1 &
+		echo "created $projectName"
 	fi
 }
