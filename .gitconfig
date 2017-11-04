@@ -1,0 +1,12 @@
+[core]
+	editor = vim -c \"set fenc=utf-8\"
+	excludesfile = /Users/ryosei/.gitignore_global
+[ghq]
+	root = ~/.go/src
+[user]
+	name = ryosebach
+	email = ryo.freezia@gmail.com
+[merge]
+	ff = false
+[pull]
+	ff = only
