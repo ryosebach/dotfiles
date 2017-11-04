@@ -1,0 +1,162 @@
+#!/bin/bash
+
+DOTFILES_GITHUB="https://github.com/ryosebach/dotfiles.git"; export DOTFILES_GITHUB
+if [ -z "${DOTPATH:-}" ]; then
+	DOTPATH=~/.dotfiles; export DOTPATH
+fi
+
+# lower returns a copy of the string with all letters mapped to their lower case.
+# shellcheck disable=SC2120
+lower() {
+    if [ $# -eq 0 ]; then
+        cat <&0
+    elif [ $# -eq 1 ]; then
+        if [ -f "$1" -a -r "$1" ]; then
+            cat "$1"
+        else
+            echo "$1"
+        fi
+    else
+        return 1
+    fi | tr "[:upper:]" "[:lower:]"
+}
+
+# upper returns a copy of the string with all letters mapped to their upper case.
+# shellcheck disable=SC2120
+upper() {
+    if [ $# -eq 0 ]; then
+        cat <&0
+    elif [ $# -eq 1 ]; then
+        if [ -f "$1" -a -r "$1" ]; then
+            cat "$1"
+        else
+            echo "$1"
+        fi
+    else
+        return 1
+    fi | tr "[:lower:]" "[:upper:]"
+}
+
+e_newline() {
+    printf "\n"
+}
+
+e_header() {
+    printf " \033[37;1m%s\033[m\n" "$*"
+}
+
+e_error() {
+    printf " \033[31m%s\033[m\n" "✖ $*" 1>&2
+}
+
+e_warning() {
+    printf " \033[31m%s\033[m\n" "$*"
+}
+
+e_done() {
+    printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
+}
+
+e_arrow() {
+    printf " \033[37;1m%s\033[m\n" "➜ $*"
+}
+
+e_indent() {
+    for ((i=0; i<${1:-4}; i++)); do
+        echon " "
+    done
+    if [ -n "$2" ]; then
+        echo "$2"
+    else
+        cat <&0
+    fi
+}
+
+e_success() {
+    printf " \033[37;1m%s\033[m%s...\033[32mOK\033[m\n" "✔ " "$*"
+}
+
+# echon is a script to emulate the -n flag functionality with 'echo'
+# for Unix systems that don't have that available.
+echon() {
+    echo "$*" | tr -d '\n'
+}
+
+# is_debug returns true if $DEBUG is set
+is_debug() {
+    if [ "$DEBUG" = 1 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+is_exists() {
+	which "$1" >/dev/null 2>&1
+	return $?
+}
+
+dotfiles_download() {
+    if [ -d "$DOTPATH" ]; then
+   #     log_fail "$DOTPATH: already exists"
+        exit 1
+    fi
+
+    e_newline
+    e_header "Downloading dotfiles..."
+
+    if is_debug; then
+        :
+    else
+		if is_exists "git"; then
+	        # --recursive equals to ...
+	        # git submodule init
+	        # git submodule update
+	        git clone --recursive "$DOTFILES_GITHUB" "$DOTPATH"
+
+	    elif is_exists "curl" || is_exists "wget"; then
+	        # curl or wget
+	        local tarball="https://github.com/ryosebach/dotfiles/archive/master.tar.gz"
+	        if is_exists "curl"; then
+	            curl -L "$tarball"
+	
+	        elif is_exists "wget"; then
+	            wget -O - "$tarball"
+	
+	        fi | tar xvz
+	        if [ ! -d dotfiles-master ]; then
+	 #           log_fail "dotfiles-master: not found"
+	            exit 1
+	        fi
+	        command mv -f dotfiles-master "$DOTPATH"
+	
+	    else
+	        log_fail "curl or wget required"
+	        exit 1
+	    fi
+    fi
+    e_newline && e_done "Download"
+}
+
+dotfiles_deploy() {
+    e_newline
+    e_header "Deploying dotfiles..."
+
+    if [ ! -d $DOTPATH ]; then
+ #       log_fail "$DOTPATH: not found"
+        exit 1
+    fi
+
+    cd "$DOTPATH"
+
+    if is_debug; then
+        :
+    else
+        make deploy
+    fi &&
+
+        e_newline && e_done "Deploy"
+}
+
+dotfiles_download
+dotfiles_deploy
