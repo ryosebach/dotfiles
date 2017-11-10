@@ -54,6 +54,33 @@ upper() {
     fi | tr "[:lower:]" "[:upper:]"
 }
 
+is_osx() {
+    os_detect
+    if [ "$PLATFORM" = "osx" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+is_linux() {
+    os_detect
+    if [ "$PLATFORM" = "linux" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+is_bsd() {
+    os_detect
+    if [ "$PLATFORM" = "bsd" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 e_newline() {
     printf "\n"
 }
