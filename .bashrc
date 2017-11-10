@@ -1,12 +1,9 @@
-####################################################
-# コマンドプロンプトにマシンメイトカレントのフルパスを表示
-# gitのブランチ表示
-# 色付けをするなどなど
-####################################################
-source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
-source /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
-#GIT_PS1_SHOWDIRTYSTATE=true
-#export PS1='\[\033[32m\]\u\[\033[00m\]:\[\033[34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+export GOPATH=~/.go/src
+
+test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
+test -r ~/.dotfiles/etc/lib/git-prompt.sh && . ~/.dotfiles/etc/lib/git-prompt.sh
+test -r ~/.dotfiles/etc/lib/git-completion.bash && . ~/.dotfiles/etc/lib/git-completion.bash
+test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc
 
 #################  プロンプトに各種情報を表示
 # GIT_PS1_SHOWUPSTREAM
