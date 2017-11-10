@@ -112,6 +112,11 @@ is_exists() {
 	which "$1" >/dev/null 2>&1
 	return $?
 }
+
+has() {
+	is_exists "$@"
+}
+
 dotfiles_logo='
       | |     | | ./ _|(_)| |           
     __| | ___ | |_| |_  _ | | ___  ___  
