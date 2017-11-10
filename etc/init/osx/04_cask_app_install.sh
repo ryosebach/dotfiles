@@ -1,3 +1,4 @@
+brew cask install unity
 brew cask install alfred
 brew cask install clipy
 brew cask install google-chrome
