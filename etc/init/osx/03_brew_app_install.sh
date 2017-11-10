@@ -1,0 +1,10 @@
+brew install the_platinum_searcher
+brew install go
+brew install peco
+brew install ghq
+brew install tig
+brew install gibo
+brew install wget
+brew install nkf
+brew install ghostscript
+brew install hub
