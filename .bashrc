@@ -47,38 +47,27 @@ GIT_PS1_SHOWSTASHSTATE=1
 #PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\] \$ '
 PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[31m\]$(__git_ps1)\[\e[0m\] \$ '
 
-##############
 
 
-################
-#grep
-###############
-export GREP_COLOR='1;37;41'
+
+
+
+#alias field
+
+alias nvim='vim -u NONE -N -i NONE'
+alias vi='vim'
+alias cp="cp -i"
+alias mv="mv -i"
+alias du='du -h'
+
 alias grep='grep -E --color=auto'
 
-################
-# color
-################
-if [ "$TERM" == xterm ]
-  then
-  export TERM=xterm-color
-fi
-
-
-##############
-#alias field
-############
-
-alias vim-plane='vim -u NONE -N'
-
-
-######
-#dir
-######
 
 export LS_COLORS='no=01;37:fi=00:di=01;36:ln=01;32:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=40;32;01:ex=01;33:*core=01;31:'
-alias ls='ls -G'
 
+
+alias ..='cd ..'
+alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -la'
 alias up='cd ..; ls -l'
