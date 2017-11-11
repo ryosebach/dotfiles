@@ -145,11 +145,12 @@ has() {
 }
 
 dotfiles_logo='
-      | |     | | ./ _|(_)| |           
-    __| | ___ | |_| |_  _ | | ___  ___  
-   / _| |/ _ \| ,_|  _|| || |/ _ \/ __| 
-  | (_| | (_) | |_| |  | || |  __/\__ \ 
-   \___/ \___/ \__|_|  |_||_|\___||___/ 
+       _       _     __  _  _  
+      | |     | |  / ._|(_)| |           
+    __| | ___ | |_ | |_  _ | |  ___  ___  
+   / _| |/ _ \| ,_||  _|| || | / _ \/ __| 
+  | (_| | (_) | |_ | |  | || ||  __/\__ \ 
+   \___/ \___/ \__||_|  |_||_| \___||___/ 
 '
 
 dotfiles_download() {
@@ -214,19 +215,37 @@ dotfiles_deploy() {
         e_newline && e_done "Deploy"
 }
 
-#dotfiles_download
-#dotfiles_deploy
+dotfiles_initialize() {
+    if [ "$1" = "init" ]; then
+        e_newline
+        e_header "Initializing dotfiles..."
+
+        if is_debug; then
+            :
+        else
+            if [ -f Makefile ]; then
+                make init
+            else
+                log_fail "Makefile: not found"
+                exit 1
+            fi
+        fi &&
+            e_newline && e_done "Initialize"
+    fi
+}
 
 dotfiles_install() {
-    # 1. Download the repository
-    # ==> downloading
-    #
-    # Priority: git > curl > wget
-    dotfiles_download &&
+	# 1. Download the repository
+	# ==> downloading
+	dotfiles_download &&
 
-    # 2. Deploy dotfiles to your home directory
-    # ==> deploying
-    dotfiles_deploy
+	# 2. Deploy dotfiles to your home directory
+	# ==> deploying
+	dotfiles_deploy &&
+
+	# 3. Execute all sh files within etc/init/
+	# ==> initializing
+	dotfiles_initialize "$@"
 }
 
 if echo "$-" | grep -q "i"; then
@@ -266,7 +285,7 @@ else
         else
             e_newline
             e_arrow "Restarting your shell..."
-            exec "${SHELL:-/bin/zsh}"
+            exec "${SHELL:-/bin/bash}"
         fi
     fi
 fi
