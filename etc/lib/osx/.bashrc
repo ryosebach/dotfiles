@@ -1,7 +1,7 @@
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install
 
 
-test -r $HOME/.nodebrew/current/bin/nodebrew && export PATH=$PATH:$HOME/.nodebrew/current/bin
+test -r $HOME/.nodebrew/current/bin && export PATH=$PATH:$HOME/.nodebrew/current/bin
 
 ###########
 #GUI*CUI
