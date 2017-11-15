@@ -130,4 +130,14 @@ if has 'peco'; then
 	}
 	
 	alias sshpeco='peco-sshconfig-ssh'
+
+	make-project() {
+		local service=$(ls -1 $GOPATH | peco)
+		local projFolder="$GOPATH/$service/ryosebach/$1"
+		mkdir $projFolder
+		cd $projFolder
+		git init
+	}
+	alias mkproj='make-project'
 fi
+
