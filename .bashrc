@@ -1,8 +1,10 @@
 export GOPATH=~/.go/src
 
+# 各種スクリプトの読み込みを行う
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 test -r ~/.dotfiles/etc/lib/git-prompt.sh && . ~/.dotfiles/etc/lib/git-prompt.sh
 test -r ~/.dotfiles/etc/lib/git-completion.bash && . ~/.dotfiles/etc/lib/git-completion.bash
+# OS依存のbashrcを読み込む
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc
 
 #################  プロンプトに各種情報を表示
@@ -68,6 +70,7 @@ export LS_COLORS='no=01;37:fi=00:di=01;36:ln=01;32:pi=40;33:so=01;35:bd=40;33;01
 
 alias ..='cd ..'
 alias ls='ls -G'
+alias l='ls -l'
 alias ll='ls -l'
 alias la='ls -la'
 alias up='cd ..; ls -l'
@@ -75,9 +78,9 @@ alias up='cd ..; ls -l'
 
 
 
-###########
-##  peco ##
-###########
+##########
+## peco ##
+##########
 
 if has 'peco'; then
 	# peco-cd
