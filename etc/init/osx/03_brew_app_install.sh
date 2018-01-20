@@ -10,6 +10,7 @@ nkf
 ghostscript
 hub
 tree
+graphviz
 )
 
 for app in ${BrewApp[@]}; do
