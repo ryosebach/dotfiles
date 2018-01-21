@@ -19,3 +19,9 @@ elif is_exists "wget"; then
 fi | tar xvz -C solarized --strip-components 1
 
 open solarized/
+
+#Install atom package
+apm install plantuml-viewer
+apm install language-plantuml
+apm install Sublime-Style-Column-Selection
+apm install linter
