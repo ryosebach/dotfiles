@@ -1,4 +1,4 @@
-export GOPATH=~/.go/src
+export GOPATH=~/.go
 
 # 各種スクリプトの読み込みを行う
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
