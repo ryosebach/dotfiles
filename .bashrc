@@ -144,3 +144,5 @@ if has 'peco'; then
 	alias mkproj='make-project'
 fi
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
