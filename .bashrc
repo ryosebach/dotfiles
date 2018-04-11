@@ -77,6 +77,24 @@ alias up='cd ..; ls -l'
 
 
 
+if has 'fzf'; then
+
+	init-proj () {
+		if [ ! -z $1 ]; then
+			local service=$(\ls -1 "$GOPATH/src" | fzf)
+			local projFolder="$GOPATH/src/$service/ryosebach/$1"
+			mkdir $projFolder
+			cd $projFolder
+			pwd
+			git init
+			curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
+			echo "created $projFolder"
+		else
+			echo "Please input ProjectName"
+		fi
+	}
+
+fi
 
 ##########
 ## peco ##
