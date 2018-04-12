@@ -1,5 +1,6 @@
 ConfirmApp=(
 "kap"
+"atom"
 "insomnia"
 "hyperswitch"
 "spectacle"
