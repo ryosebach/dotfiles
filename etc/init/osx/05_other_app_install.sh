@@ -8,14 +8,20 @@ curl -L git.io/nodebrew | perl - setup
 
 e_newline && e_header "Terminal Solarized Download"
 
-tarball="https://github.com/tomislav/osx-terminal.app-colors-solarized/archive/master.tar.gz"
+TarBalls=(
+"https://github.com/sanographix/azusa-colors/archive/master.tar.gz"
+"https://github.com/tomislav/osx-terminal.app-colors-solarized/archive/master.tar.gz"
+)
 
+count=0
 cd ~/Downloads
-mkdir solarized
-if is_exists "curl"; then
-  curl -L "$tarball"
-elif is_exists "wget"; then
-  wget -O - "$tarball"
-fi | tar xvz -C solarized --strip-components 1
-
-open solarized/
+for tarball in ${TarBalls[@]}; do
+	mkdir "tarball${count}"
+	if is_exists "curl"; then
+	  curl -L "$tarball"
+	elif is_exists "wget"; then
+	  wget -O - "$tarball"
+	fi | tar xvz -C "tarball${count}" --strip-components 1
+	open "tarball${count}"
+	count=`echo "$count+1" | bc`
+done
