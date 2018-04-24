@@ -3,7 +3,7 @@
 #Install nodebrew
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install
 
-e_newline && e_header "Install Nodebrew"
+e_newline && e_arrow "Install Nodebrew"
 curl -L git.io/nodebrew | perl - setup
 
 e_newline && e_header "Terminal Solarized & Azusa-Colors Download"
@@ -25,3 +25,5 @@ for tarball in ${TarBalls[@]}; do
 	fi | tar xvz -C ${DirName} --strip-components 1
 	open ${DirName}
 done
+
+e_newline && e_success "other applicaion is installed"

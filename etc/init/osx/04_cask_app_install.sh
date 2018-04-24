@@ -1,3 +1,9 @@
+#!/bin/sh
+
+test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
+
+e_arrow "brew cask application installing"
+
 ConfirmApp=(
 "kap"
 "atom"
@@ -52,3 +58,5 @@ for app in ${ConfirmApp[@]}; do
 		echo "Skip installing $app"
 	fi
 done
+
+e_success "brew cask application is installed"
