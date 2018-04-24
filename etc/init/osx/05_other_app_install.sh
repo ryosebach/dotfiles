@@ -11,6 +11,7 @@ e_newline && e_header "Terminal Solarized & Azusa-Colors Download"
 TarBalls=(
 "https://github.com/sanographix/azusa-colors/archive/master.tar.gz"
 "https://github.com/tomislav/osx-terminal.app-colors-solarized/archive/master.tar.gz"
+"https://github.com/shoya140/zebra/archive/master.tar.gz"
 )
 
 cd ~/Downloads
