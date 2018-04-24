@@ -5,12 +5,12 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 e_arrow "brew cask application installing"
 
 ConfirmApp=(
+"mp3tag"
 "kap"
 "atom"
 "insomnia"
 "hyperswitch"
 "spectacle"
-"unity"
 "visual-studio"
 )
 yes_or_no(){
