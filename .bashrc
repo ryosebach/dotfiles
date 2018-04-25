@@ -1,4 +1,3 @@
-export GOPATH=~/.go
 
 # 各種スクリプトの読み込みを行う
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
@@ -25,7 +24,12 @@ GIT_PS1_SHOWSTASHSTATE=1
 #PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\] \$ '
 PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[31m\]$(__git_ps1)\[\e[0m\] \$ '
 
+# --------------------------------------------- 
+# for golang
+# --------------------------------------------- 
 
+export GOPATH=~/.go
+export PATH=$GOPATH/bin:$PATH
 
 
 
