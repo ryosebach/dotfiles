@@ -41,6 +41,7 @@ export PATH=$GOPATH/bin:$PATH
 alias vi='nvim'
 alias cp="cp -i"
 alias mv="mv -i"
+alias rm='rm -i'
 alias du='du -h'
 
 alias grep='grep -E --color=auto'
