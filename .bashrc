@@ -7,44 +7,20 @@ test -r ~/.dotfiles/etc/lib/git-completion.bash && . ~/.dotfiles/etc/lib/git-com
 # OS依存のbashrcを読み込む
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc
 
-#################  プロンプトに各種情報を表示
-# GIT_PS1_SHOWUPSTREAM
-# 現在のブランチがupstreamより進んでいるとき">"を
-# 遅れているとき"<"を、遅れてるけど独自の変更もあるとき"<>"を
-# 同じ時"="を表示する。
-# 
-# GIT_PS1_SHOWUNTRACKEDFILES
-# addされてない新規ファイルがある(untracked)とき"%"を表示する
-#
-# GIT_PS1_SHOWSTASHSTATE
-# stashになにか入っている(stashed)とき"$"を表示する
-#
-# GIT_PS1_SHOWDIRTYSTATE
-# addされてない変更(unstaged)があったとき"*"を表示する
-# addされているがcommitされていない変更(staged)があったとき"+"を表示する
-###################
-
+# --------------------------------------------- 
+# Setting option fot GIT_PS1
+# https://gist.github.com/ryosebach/3217600f52dcae87d78961a1aa44a5b0
+# --------------------------------------------- 
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
-GIT_PS1_SHOWUNTRACKEDFILES=
+GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 
-############### ターミナルのコマンド受付状態の表示変更
-# \u ユーザ名
-# \h ホスト名
-# \W カレントディレクトリ
-# \w カレントディレクトリのパス
-# \n 改行
-# \d 日付
-# \[ 表示させない文字列の開始
-# \] 表示させない文字列の終了
-# \$ $
-#####################
-
-#export PS1='\[\033[1;32m\]\u\[\033[00m\]:\[\033[1;34m\]\W\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \$ '
-#export PS1='\[\e[32m\]\u\[\e[0m\]:\[\e[34m\]\W\[\e[31m\]$(__git_ps1)\[\e[0m\] \$ '
-
+# --------------------------------------------- 
+# Setting PS1
+# https://gist.github.com/ryosebach/1deee3855b7c8cec6e58970e4a1f5476
+# --------------------------------------------- 
 
 #PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\] \$ '
 PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[31m\]$(__git_ps1)\[\e[0m\] \$ '
