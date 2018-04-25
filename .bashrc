@@ -38,8 +38,7 @@ export PATH=$GOPATH/bin:$PATH
 #alias field
 # --------------------------------------------- 
 
-alias nvim='vim -u NONE -N -i NONE'
-alias vi='vim'
+alias vi='nvim'
 alias cp="cp -i"
 alias mv="mv -i"
 alias du='du -h'
