@@ -69,6 +69,8 @@ alias up='cd ..; ls -l'
 # for fzf
 # --------------------------------------------- 
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 if has 'fzf'; then
 
 	init-proj () {
@@ -153,6 +155,3 @@ if has 'peco'; then
 	}
 	alias mkproj='make-project'
 fi
-
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
