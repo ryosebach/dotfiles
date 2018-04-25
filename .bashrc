@@ -1,9 +1,12 @@
+# .bashrc
+# --------------------------------------------- 
+# - https://github.com/ryosebach/dotfiles
 
-# 各種スクリプトの読み込みを行う
+# loading some file
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 test -r ~/.dotfiles/etc/lib/git-prompt.sh && . ~/.dotfiles/etc/lib/git-prompt.sh
 test -r ~/.dotfiles/etc/lib/git-completion.bash && . ~/.dotfiles/etc/lib/git-completion.bash
-# OS依存のbashrcを読み込む
+# loading .bashrc for using os
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc
 
 # --------------------------------------------- 
@@ -31,10 +34,9 @@ PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0
 export GOPATH=~/.go
 export PATH=$GOPATH/bin:$PATH
 
-
-
-
+# --------------------------------------------- 
 #alias field
+# --------------------------------------------- 
 
 alias nvim='vim -u NONE -N -i NONE'
 alias vi='vim'
@@ -63,6 +65,9 @@ alias la='ls -la'
 alias up='cd ..; ls -l'
 
 
+# --------------------------------------------- 
+# for fzf
+# --------------------------------------------- 
 
 if has 'fzf'; then
 
@@ -83,9 +88,9 @@ if has 'fzf'; then
 
 fi
 
-##########
-## peco ##
-##########
+# --------------------------------------------- 
+# for peco 
+# --------------------------------------------- 
 
 if has 'peco'; then
 	# peco-cd
