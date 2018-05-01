@@ -35,13 +35,12 @@ export GOPATH=~/.go
 export PATH=$GOPATH/bin:$PATH
 
 # --------------------------------------------- 
-#alias field
+# alias field
 # --------------------------------------------- 
 
 alias vi='nvim'
 alias cp="cp -i"
 alias mv="mv -i"
-alias rm='rm -i'
 alias du='du -h'
 
 alias grep='grep -E --color=auto'
@@ -62,7 +61,6 @@ alias ls='ls -G'
 alias l='ls -l'
 alias ll='ls -l'
 alias la='ls -la'
-alias up='cd ..; ls -l'
 
 
 # --------------------------------------------- 
