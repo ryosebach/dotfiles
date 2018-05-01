@@ -16,6 +16,7 @@ ghostscript
 hub
 tree
 graphviz
+neovim
 )
 
 for app in ${BrewApp[@]}; do
