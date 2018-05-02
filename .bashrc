@@ -146,9 +146,9 @@ if has 'peco'; then
 
 	make-project() {
 		if [ ! -z $1 ]; then
-			local service=$(ls -1 $GOPATH | peco)
+			local service=$(\ls -1 "$GOPATH/src" | peco)
 			if [ -n "$service" ]; then
-				local projFolder="$GOPATH/$service/ryosebach/$1"
+				local projFolder="$GOPATH/src/$service/ryosebach/$1"
 				mkdir $projFolder
 				cd $projFolder
 				git init
