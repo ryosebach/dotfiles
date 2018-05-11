@@ -111,6 +111,14 @@ if available "fzf:peco" > /dev/null; then
 	}
 	alias scd='filter-lscd'
 
+	cd2repository () {
+		local dir="$(ghq list | $FILTER_TOOL)"
+		if [ -n "$dir" ]; then
+			cd "$(ghq root)/$dir"
+		fi
+	}
+	alias g='cd2repository'
+	
 	filter-and-ssh() {
 	    local host=$(grep 'Host ' ~/.ssh/config | awk '{print $2}' | $FILTER_TOOL)
 	    if [ -n "$host" ]; then
@@ -127,15 +135,6 @@ fi
 # --------------------------------------------- 
 
 if has 'peco'; then
-	
-	# repositoryにcdする．escで抜けた時は移動しないように
-	function pcd {
-		local dir="$(ghq list | peco)"
-		if [ ! -z "$dir" ] ; then
-			cd "$(ghq root)/$dir"
-		fi
-	}
-	alias g='pcd'
 	
 	peco-select-history() {
 		declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
