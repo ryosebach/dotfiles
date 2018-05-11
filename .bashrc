@@ -73,6 +73,8 @@ alias l='ls -l'
 alias ll='ls -l'
 alias la='ls -la'
 
+export HISTCONTROL=ignoreboth
+export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
 
 # --------------------------------------------- 
 # for fzf
