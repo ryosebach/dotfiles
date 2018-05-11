@@ -82,9 +82,14 @@ export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-if has 'fzf'; then
+# --------------------------------------------- 
+# for Interactive Filter Tools 
+# --------------------------------------------- 
 
 	init-proj () {
+if available "fzf:peco" > /dev/null; then
+	export FILTER_TOOL=`available "fzf:peco"`
+
 		if [ ! -z $1 ]; then
 			local service=$(\ls -1 "$GOPATH/src" | fzf)
 			local projFolder="$GOPATH/src/$service/ryosebach/$1"
@@ -99,6 +104,15 @@ if has 'fzf'; then
 		fi
 	}
 
+	filter-and-ssh() {
+	    local host=$(grep 'Host ' ~/.ssh/config | awk '{print $2}' | $FILTER_TOOL)
+	    if [ -n "$host" ]; then
+	        echo "ssh -F ~/.ssh/config $host"
+	        ssh -F ~/.ssh/config $host
+	    fi
+	}
+	
+	alias sshh='filter-and-ssh'
 fi
 
 # --------------------------------------------- 
@@ -147,16 +161,6 @@ if has 'peco'; then
 	bind -x '"\C-uc": peco-find'
 	bind -x '"\C-ua": peco-find-all'
 	
-	peco-sshconfig-ssh() {
-	    local host=$(grep 'Host ' ~/.ssh/config | awk '{print $2}' | peco)
-	    if [ -n "$host" ]; then
-	        echo "ssh -F ~/.ssh/config $host"
-	        ssh -F ~/.ssh/config $host
-	    fi
-	}
-	
-	alias sshpeco='peco-sshconfig-ssh'
-
 	make-project() {
 		if [ ! -z $1 ]; then
 			local service=$(\ls -1 "$GOPATH/src" | peco)
