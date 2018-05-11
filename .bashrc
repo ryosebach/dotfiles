@@ -103,6 +103,13 @@ if available "fzf:peco" > /dev/null; then
 			echo "Please input ProjectName"
 		fi
 	}
+	filter-lscd () {
+		local dir="$(find . -maxdepth 1 -type d | sed -e 's;\./;;' | $FILTER_TOOL)"
+		if [ -n "$dir" ] ; then
+			cd $dir
+		fi
+	}
+	alias scd='filter-lscd'
 
 	filter-and-ssh() {
 	    local host=$(grep 'Host ' ~/.ssh/config | awk '{print $2}' | $FILTER_TOOL)
@@ -120,15 +127,6 @@ fi
 # --------------------------------------------- 
 
 if has 'peco'; then
-	# peco-cd
-	peco-lscd () {
-		local dir="$( find . -maxdepth 1 -type d | sed -e 's;\./;;' | peco )"
-		if [ ! -z "$dir" ] ; then
-			cd "$dir"
-		fi
-	}
-	alias plcd='peco-lscd'
-	
 	
 	# repositoryにcdする．escで抜けた時は移動しないように
 	function pcd {
