@@ -132,6 +132,14 @@ if available "fzf:peco" > /dev/null; then
 	}
 	
 	alias sshh='filter-and-ssh'
+
+	ssh-add-with-filter() {
+		local sshFile=$(\ls -1 ~/.ssh | grep -v "\." | grep id | $FILTER_TOOL)
+		eval `ssh-agent`
+		ssh-add ~/.ssh/$sshFile
+		echo "ssh-add $sshFile"
+	}
+	alias sshadd='ssh-add-with-filter'
 fi
 
 # --------------------------------------------- 
