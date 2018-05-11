@@ -86,23 +86,27 @@ export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
 # for Interactive Filter Tools 
 # --------------------------------------------- 
 
-	init-proj () {
 if available "fzf:peco" > /dev/null; then
 	export FILTER_TOOL=`available "fzf:peco"`
 
+	create-project () {
 		if [ ! -z $1 ]; then
-			local service=$(\ls -1 "$GOPATH/src" | fzf)
-			local projFolder="$GOPATH/src/$service/ryosebach/$1"
-			mkdir $projFolder
-			cd $projFolder
-			pwd
-			git init
-			curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
-			echo "created $projFolder"
+			local service=$(\ls -1 "$GOPATH/src" | $FILTER_TOOL)
+			if [ -n "$service" ]; then
+				local projFolder="$GOPATH/src/$service/ryosebach/$1"
+				mkdir $projFolder
+				cd $projFolder
+				git init
+				curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
+				echo "created $projFolder"
+			else
+				echo "Please Select Service"
+			fi
 		else
-			echo "Please input ProjectName"
+			echo "Please Input Project Name"
 		fi
 	}
+	
 	filter-lscd () {
 		local dir="$(find . -maxdepth 1 -type d | sed -e 's;\./;;' | $FILTER_TOOL)"
 		if [ -n "$dir" ] ; then
@@ -158,20 +162,4 @@ if has 'peco'; then
 	bind -x '"\C-uc": peco-find'
 	bind -x '"\C-ua": peco-find-all'
 	
-	make-project() {
-		if [ ! -z $1 ]; then
-			local service=$(\ls -1 "$GOPATH/src" | peco)
-			if [ -n "$service" ]; then
-				local projFolder="$GOPATH/src/$service/ryosebach/$1"
-				mkdir $projFolder
-				cd $projFolder
-				git init
-			else
-				echo "Please Select Service"
-			fi
-		else
-			echo "Plaese Input Project Name"
-		fi
-	}
-	alias mkproj='make-project'
 fi
