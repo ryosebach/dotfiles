@@ -24,8 +24,18 @@ GIT_PS1_SHOWSTASHSTATE=1
 # https://gist.github.com/ryosebach/1deee3855b7c8cec6e58970e4a1f5476
 # --------------------------------------------- 
 
-#PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\] \$ '
-PS1='$(if [ $? = 0 ]; then echo \[\e[32m\]; else echo \[\e[31m\]; fi)\u\e[37m@\h\[\e[0m\]:\[\e[34m\]\w\[\e[31m\]$(__git_ps1)\[\e[0m\] \$ '
+PS1='$(if [ $? = 0 ]; then 
+		echo \[\e[32m\]; 
+	else 
+		echo \[\e[31m\]; 
+	fi)\u'
+PS1+='\[\e[0m\]@'
+PS1+='\[\e[37m\]\h'
+PS1+='\[\e[0m\]:'
+PS1+='\[\e[34m\]\w'
+PS1+='\[\e[31m\]$(__git_ps1)'
+PS1+='\[\e[0m\] \$ '
+
 
 # --------------------------------------------- 
 # for golang
