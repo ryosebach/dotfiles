@@ -161,6 +161,10 @@ available () {
     return 1
 }
 
+ 
+if [ -z "${FILTER_TOOL}" ]; then
+	FILTER_TOOL=$(available "fzf:peco"); export FILTER_TOOL
+fi
 
 dotfiles_logo='
        _       _     __  _  _  
