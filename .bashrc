@@ -86,9 +86,7 @@ export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
 # for Interactive Filter Tools 
 # --------------------------------------------- 
 
-if available "fzf:peco" > /dev/null; then
-	export FILTER_TOOL=`available "fzf:peco"`
-
+if [ -n "$FILTER_TOOL" ] ; then
 	create-project () {
 		if [ ! -z $1 ]; then
 			local service=$(\ls -1 "$GOPATH/src" | $FILTER_TOOL)
