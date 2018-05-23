@@ -104,6 +104,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 			echo "Please Input Project Name"
 		fi
 	}
+	alias mkproj='create-project'
 	
 	filter-lscd () {
 		local dir="$(find . -maxdepth 1 -type d | sed -e 's;\./;;' | $FILTER_TOOL)"
