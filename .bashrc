@@ -3,6 +3,7 @@
 # - https://github.com/ryosebach/dotfiles
 
 # loading some file
+test -r ~/.fzf.bash && . ~/.fzf.bash
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 test -r ~/.dotfiles/etc/lib/git-prompt.sh && . ~/.dotfiles/etc/lib/git-prompt.sh
 test -r ~/.dotfiles/etc/lib/git-completion.bash && . ~/.dotfiles/etc/lib/git-completion.bash
@@ -75,12 +76,6 @@ alias la='ls -la'
 
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
-
-# --------------------------------------------- 
-# for fzf
-# --------------------------------------------- 
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # --------------------------------------------- 
 # for Interactive Filter Tools 
