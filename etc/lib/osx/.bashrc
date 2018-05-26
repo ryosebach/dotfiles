@@ -43,7 +43,7 @@ alias sorry-desktop='defaults delete com.apple.finder CreateDesktop; killall Fin
 # --------------------------------------------- 
 
 if [ -n "$FILTER_TOOL" ] ; then
-	init-unity-proj() {
+	make-unity-proj() {
 		if [ $# -ge 1 ] ; then
 			local service=$(\ls -1 $GOPATH/src | $FILTER_TOOL)
 			if [ -z "$service" ] ; then
@@ -64,6 +64,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 			echo "created $1"
 		fi
 	}
+	alias mkuniproj='make-unity-proj'
 	unirepo () {
 		local dir="$(ghq list | $FILTER_TOOL)"
 		if [ -n "$dir" ] ; then
