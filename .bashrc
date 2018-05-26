@@ -90,6 +90,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 				mkdir $projFolder
 				cd $projFolder
 				git init
+				gibo macos windows > .gitignore
 				curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
 				echo "created $projFolder"
 			else
