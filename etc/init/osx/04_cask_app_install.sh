@@ -7,6 +7,7 @@ e_arrow "brew cask application installing"
 ConfirmApp=(
 "mp3tag"
 "kap"
+"marp"
 "atom"
 "insomnia"
 "hyperswitch"
