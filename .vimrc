@@ -10,7 +10,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 set number
 
 " ftpluginを読み込むようにする
-  filetype plugin on
+filetype plugin on
 
 " マウスも使えるように
 set mouse=a
