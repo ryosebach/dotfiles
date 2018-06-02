@@ -11,3 +11,9 @@ if [ ! -z "$mp3tagDir" ] ; then
 	echo "[Software\\\\Wine\\\\Fonts\\\\Replacements]" >> ~/Library/Application\ Support/$mp3tagDir/user.reg
 	echo "\"MS UI Gothic\"=\"Hiragino Maru Gothic ProN W4\"" >> ~/Library/Application\ Support/$mp3tagDir/user.reg
 fi
+
+e_newline && e_header "neovim settings linking"
+
+test ! -r ~/.vim && mkdir ~/.vim 
+ln -s ~/.vim ~/.config/nvim/
+ln -s ~/.vimrc ~/config/nvim/init.vim
