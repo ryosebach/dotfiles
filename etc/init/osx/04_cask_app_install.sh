@@ -8,7 +8,6 @@ ConfirmApp=(
 "mp3tag"
 "kap"
 "marp"
-"atom"
 "insomnia"
 "hyperswitch"
 "spectacle"
@@ -49,6 +48,7 @@ brew cask install franz
 brew cask install the-unarchiver
 brew cask install vlc
 brew cask install adobe-creative-cloud
+brew cask install atom
 
 for app in ${ConfirmApp[@]}; do
 	echo "Installing $app... OK? (y, N)"
