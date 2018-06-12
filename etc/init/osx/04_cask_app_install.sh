@@ -13,31 +13,6 @@ ConfirmApp=(
 "spectacle"
 "visual-studio"
 )
-yes_or_no(){
-	while true; do
-		read answer
-		case $answer in
-		yes)
-			return 0
-			;;
-		y) 
-			return 0
-			;;
-		no)
-			return 1
-			;;
-		N)
-			return 1
-			;;
-		n)
-			return 1
-			;;
-		*)
-			echo -e "please say yes or no"
-			;;
-		esac
-	done
-}
 brew tap caskroom/versions
 brew cask install alfred
 brew cask install clipy

@@ -144,6 +144,32 @@ has() {
 	is_exists "$@"
 }
 
+yes_or_no(){
+	while true; do
+		read answer
+		case $answer in
+		yes)
+			return 0
+			;;
+		y) 
+			return 0
+			;;
+		no)
+			return 1
+			;;
+		N)
+			return 1
+			;;
+		n)
+			return 1
+			;;
+		*)
+			echo -e "please say yes or no"
+			;;
+		esac
+	done
+}
+
 available () {
     local x candidates
     candidates="$1:"
