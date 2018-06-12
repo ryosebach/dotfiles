@@ -99,15 +99,27 @@ brew-cask-upgrade(){
 		local versions=($(ls -1 "/usr/local/Caskroom/${app}/.metadata/"));
 		local current=$(echo ${versions} | awk '{print $NF}');
 		if [[ "${latest}" = "latest" ]]; then
-			e_warning "[!] ${app}: ${current} == ${latest}";
-			[[ "$1" = "-f" ]] && brew cask install "${app}" --force;
-			continue;
+			e_newline && e_warning "[!] ${app}: ${current} == ${latest}";
+			e_arrow "Installing ${app}.... OK? (y, N)"
+			if yes_or_no; then
+				e_newline && e_header "install ${app}"
+				[[ "$1" = "-f" ]] && brew cask install "${app}" --force;
+				continue;
+			else
+				e_success "Skip Update ${app}"
+				continue;
+			fi
 		elif [[ "${current}" = "${latest}" ]]; then
-			e_header "[ok] ${app}: ${current} == ${latest}";
+			e_newline && e_done "[ok] ${app}: ${current} == ${latest}";
 			continue;
 		fi;
-		e_newline && e_header "[+] ${app}: ${current} -> ${latest}";
-		brew cask uninstall "${app}" --force; brew cask install "${app}";
+		e_newline && e_warning "[+] ${app}: ${current} -> ${latest}";
+		e_arrow "Installing ${app}... OK? (y, N)"
+		if yes_or_no; then
+			brew cask uninstall "${app}" --force; brew cask install "${app}";
+		else
+			e_success "Skip installing $app"
+		fi
 	done;
 }
 
