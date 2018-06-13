@@ -86,7 +86,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 		if [ ! -z $1 ]; then
 			local service=$(\ls -1 "$GOPATH/src" | $FILTER_TOOL)
 			if [ -n "$service" ]; then
-				local projFolder="$GOPATH/src/$service/ryosebach/$1"
+				local projFolder="$GOPATH/src/$service/$GITHUB_USERNAME/$1"
 				mkdir $projFolder
 				cd $projFolder
 				git init

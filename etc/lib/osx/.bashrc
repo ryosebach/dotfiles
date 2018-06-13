@@ -48,7 +48,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 			if [ -z "$service" ] ; then
 				return
 			fi
-			local projPath=$(ghq root)/$service/ryosebach/$1
+			local projPath=$(ghq root)/$service/$GITHUB_USERNAME/$1
 			local nowDir=$(pwd)
 			local unity="$(\ls -lr1 /Applications/ | grep Unity | $FILTER_TOOL)"
 			if [ -z "$unity" ] ; then
