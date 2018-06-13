@@ -187,9 +187,20 @@ available () {
     return 1
 }
 
+export_github_info () {
+	GITHUB_USERNAME=$(echo `git config --global --list | grep user.name | tr '=' '\n'` | awk '{print $2}')
+	GITHUB_USERMAIL=$(echo `git config --global --list | grep user.email | tr '=' '\n'` | awk '{print $2}')
+	export GITHUB_USERNAME
+	export GITHUB_USERMAIL
+}
+
  
 if [ -z "${FILTER_TOOL}" ]; then
 	FILTER_TOOL=$(available "fzf:peco"); export FILTER_TOOL
+fi
+
+if [ -z "${GITHUB_USERNAME}" ]; then
+	export_github_info
 fi
 
 dotfiles_logo='
