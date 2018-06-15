@@ -57,7 +57,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 			/Applications/$unity/$unity.app/Contents/MacOS/Unity -batchmode -quit -createProject $projPath >/dev/null 2>&1
 			cd "$projPath"
 			git init  >/dev/null 2>&1
-			gibo macos unity windows > .gitignore
+			gibo dump macos unity windows > .gitignore
 			curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
 			cd "$nowDir"
 			echo "created $1"
