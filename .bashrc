@@ -113,7 +113,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 	cd2repository () {
 		local dir="$(ghq list | $FILTER_TOOL)"
 		if [ -n "$dir" ]; then
-			cd "$(ghq root)/$dir"
+			ghq look "$dir"
 		fi
 	}
 	alias g='cd2repository'
