@@ -111,9 +111,9 @@ if [ -n "$FILTER_TOOL" ] ; then
 	alias scd='filter-lscd'
 
 	cd2repository () {
-		local dir="$(ghq list | $FILTER_TOOL)"
+		local dir="$(ghq list --full-path | $FILTER_TOOL)"
 		if [ -n "$dir" ]; then
-			ghq look "$dir"
+			cd "$dir"
 		fi
 	}
 	alias g='cd2repository'
