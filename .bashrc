@@ -25,12 +25,13 @@ GIT_PS1_SHOWSTASHSTATE=1
 # https://gist.github.com/ryosebach/1deee3855b7c8cec6e58970e4a1f5476
 # --------------------------------------------- 
 
+USER_ICON="(˙༥˙)"
 PS1='$(if [ $? = 0 ]; then 
 		echo \[\e[32m\]; 
 	else 
 		echo \[\e[31m\]; 
-	fi)\u'
-PS1+='\[\e[0m\]@'
+	fi)$USER_ICON'
+#PS1+='\[\e[0m\]@'
 PS1+='\[\e[37m\]\h'
 PS1+='\[\e[0m\]:'
 PS1+='\[\e[34m\]\w'
