@@ -2,6 +2,7 @@
 	editor = vim -c \"set fenc=utf-8\"
 	excludesfile = /Users/ryosei/.gitignore_global
 [ghq]
+	root = ~/dev/src
 	root = ~/.go/src
 [user]
 	name = ryosebach
