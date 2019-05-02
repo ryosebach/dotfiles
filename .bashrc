@@ -45,6 +45,7 @@ PS1+='\[\e[0m\] \$ '
 
 export GOPATH=~/.go
 export PATH=$GOPATH/bin:$PATH
+export GHQ_ROOT=`ghq root`
 
 # --------------------------------------------- 
 # alias field
@@ -85,13 +86,14 @@ export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
 if [ -n "$FILTER_TOOL" ] ; then
 	create-project () {
 		if [ ! -z $1 ]; then
-			local service=$(\ls -1 "$GOPATH/src" | $FILTER_TOOL)
+			local service=$(\ls -1 "$GHQ_ROOT" | $FILTER_TOOL)
 			if [ -n "$service" ]; then
-				local projFolder="$GOPATH/src/$service/$GITHUB_USERNAME/$1"
+				local projFolder="$GHQ_ROOT/$service/$GITHUB_USERNAME/$1"
 				mkdir $projFolder
 				cd $projFolder
 				git init
 				gibo dump macos windows > .gitignore
+				sed -i '' '1s/^/######### generated from gibo ###########'\\$'\n''/' .gitignore
 				curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
 				echo "created $projFolder"
 			else
