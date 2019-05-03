@@ -7,6 +7,23 @@ if has 'rbenv'; then
 	eval "$(rbenv init -)"
 fi
 
+# ---------------------------------------------
+# date command
+# ---------------------------------------------
+
+
+subDate () {
+option=''
+if [ ! -z $1 ]; then
+	option="-v $1"	
+	if [ ! -z $2 ]; then
+		option="$option -v $2"
+	fi
+	LANG=en_US.UTF-8 date $option '+%a %b %d %T %Y +0900'
+else
+	echo -e "set option\nexample: -12days => subdate -12d\n         -5days and -13hours => subDate -12d -13H"
+fi
+}
 
 # --------------------------------------------- 
 # GUI * CUI
