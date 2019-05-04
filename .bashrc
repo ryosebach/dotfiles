@@ -56,6 +56,7 @@ alias vim='nvim'
 alias cp="cp -i"
 alias mv="mv -i"
 alias du='du -h'
+alias dc='docker-compose'
 
 alias grep='grep -E --color=auto'
 
