@@ -45,7 +45,9 @@ PS1+='\[\e[0m\] \$ '
 
 export GOPATH=~/.go
 export PATH=$GOPATH/bin:$PATH
-export GHQ_ROOT=`ghq root`
+if has 'ghq'; then
+	export GHQ_ROOT=`ghq root`
+fi
 
 # --------------------------------------------- 
 # alias field
