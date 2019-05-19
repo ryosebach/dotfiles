@@ -13,17 +13,22 @@ ConfirmApp=(
 "spectacle"
 "visual-studio"
 )
+
+InstallApp=(
+docker
+alfred
+clipy
+google-chrome
+google-japanese-ime
+google-chrome-canary
+station
+the-unarchiver
+)
 brew tap caskroom/versions
-brew cask install alfred
-brew cask install clipy
-brew cask install google-chrome
-brew cask install google-japanese-ime
-brew cask install google-chrome-canary
-brew cask install franz
-brew cask install the-unarchiver
-brew cask install vlc
-brew cask install adobe-creative-cloud
-brew cask install atom
+
+for app in ${InstallApp[@]}; do
+  brew cask install $app
+done
 
 for app in ${ConfirmApp[@]}; do
 	echo "Installing $app... OK? (y, N)"
