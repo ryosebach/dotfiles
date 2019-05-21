@@ -18,6 +18,7 @@ tree
 graphviz
 neovim
 python
+python@2
 )
 
 for app in ${BrewApp[@]}; do
