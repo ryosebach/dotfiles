@@ -5,16 +5,15 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 e_arrow "brew cask application installing"
 
 ConfirmApp=(
-"mp3tag"
-"kap"
-"marp"
-"insomnia"
-"hyperswitch"
-"spectacle"
-"visual-studio"
+mp3tag
+kap
+marp
+insomnia
+spectacle
 )
 
 InstallApp=(
+hyperswitch
 docker
 alfred
 clipy
