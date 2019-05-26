@@ -53,8 +53,10 @@ fi
 # alias field
 # --------------------------------------------- 
 
-alias vi='nvim'
-alias vim='nvim'
+if has 'nvim'; then
+	alias vi='nvim'
+	alias vim='nvim'
+fi
 alias cp="cp -i"
 alias mv="mv -i"
 alias du='du -h'
@@ -78,6 +80,8 @@ fi
 
 
 alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
 alias ls='ls -G'
 alias l='ls -l'
 alias ll='ls -l'
