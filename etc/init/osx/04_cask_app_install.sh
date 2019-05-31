@@ -17,6 +17,7 @@ hyperswitch
 docker
 alfred
 clipy
+visual-studio-code
 docker
 google-chrome
 google-japanese-ime
