@@ -17,6 +17,7 @@ hyperswitch
 docker
 alfred
 clipy
+docker
 google-chrome
 google-japanese-ime
 google-chrome-canary
