@@ -8,8 +8,10 @@ ConfirmApp=(
 mp3tag
 kap
 marp
+vlc
 insomnia
 spectacle
+intellij-idea
 )
 
 InstallApp=(
@@ -17,6 +19,7 @@ hyperswitch
 docker
 alfred
 clipy
+java
 visual-studio-code
 docker
 google-chrome
