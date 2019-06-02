@@ -14,6 +14,7 @@ fi
 
 e_newline && e_header "neovim settings linking"
 
-test ! -r ~/.vim && mkdir ~/.vim 
-ln -s ~/.vim ~/.config/nvim/
-ln -s ~/.vimrc ~/config/nvim/init.vim
+test ! -r ~/.vim && mkdir ~/.vim
+test ! -r ~/.config && mkdir ~/.config
+ln -s ~/.vim ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
