@@ -20,6 +20,7 @@ docker
 alfred
 clipy
 java
+trailer
 visual-studio-code
 docker
 google-chrome
