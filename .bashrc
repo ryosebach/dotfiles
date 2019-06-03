@@ -30,7 +30,8 @@ PS1='$(if [ $? = 0 ]; then
 		echo \[\e[32m\]; 
 	else 
 		echo \[\e[31m\]; 
-	fi)$USER_ICON'
+	fi)'
+PS1+=${USER_ICON}
 #PS1+='\[\e[0m\]@'
 PS1+='\[\e[37m\]\h'
 PS1+='\[\e[0m\]:'
