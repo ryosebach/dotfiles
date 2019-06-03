@@ -1,7 +1,10 @@
-"indent"
+" indent
 set autoindent
 set tabstop=4
 set shiftwidth=4
+set cursorcolumn
+highlight CursorColumn ctermbg=Black
+
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set number
@@ -39,3 +42,12 @@ inoremap <silent> kk <ESC>k
 
 " インサートモードでC-d C-dで行削除
 inoremap <silent> <C-d><C-d> <ESC>dd<Insert>
+
+let g:deoplete#enable_at_startup = 1
+let g:typescript_indent_disable = 1
+
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/deoplete.nvim' , { 'do': ':UpdateRemotePlugins' }
+Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+Plug 'leafgarland/typescript-vim'
+call plug#end()
