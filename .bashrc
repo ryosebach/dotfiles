@@ -66,6 +66,7 @@ if has 'docker'; then
 	alias d='docker'
 	alias dc='docker-compose'
 	alias dmysql='docker run -it --rm mysql mysql'
+	alias dhostmysql='docker run --name mysqld -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql'
 fi
 
 alias grep='grep -E --color=auto'
