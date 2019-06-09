@@ -67,6 +67,9 @@ if has 'docker'; then
 	alias dc='docker-compose'
 	alias dmysql='docker run -it --rm mysql mysql'
 	alias dhostmysql='docker run --name mysqld -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql'
+	connect-dhostmysql () {
+		docker run --link  mysqld:mysql -it --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot'
+	}
 fi
 
 alias grep='grep -E --color=auto'
