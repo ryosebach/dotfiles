@@ -3,6 +3,7 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install
 
 test -r $HOME/.nodebrew/current/bin && export PATH=$PATH:$HOME/.nodebrew/current/bin
 test -r $HOME/.rbenv/bin && export PATH=$HOME/.rbenv/bin:$PATH
+test -r $HOME/.tfenv/bin && export PATH=$HOME/.tfenv/bin:$PATH
 if has 'rbenv'; then
 	eval "$(rbenv init -)"
 fi
