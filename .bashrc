@@ -155,6 +155,10 @@ if [ -n "$FILTER_TOOL" ] ; then
 		echo "ssh-add $sshFile"
 	}
 	alias sshadd='ssh-add-with-filter'
+
+	gbra() {
+		git branch | cut -c 3-100 | $FILTER_TOOL
+	}
 fi
 
 # --------------------------------------------- 
