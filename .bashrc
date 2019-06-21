@@ -159,6 +159,11 @@ if [ -n "$FILTER_TOOL" ] ; then
 	gbra() {
 		git branch | cut -c 3-100 | $FILTER_TOOL
 	}
+
+	gcobra() {
+		local branch=$(git branch | $FILTER_TOOL | cut -c 3-100)
+		git co $branch
+	}
 fi
 
 # --------------------------------------------- 
