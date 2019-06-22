@@ -164,6 +164,13 @@ if [ -n "$FILTER_TOOL" ] ; then
 		local branch=$(git branch | $FILTER_TOOL | cut -c 3-100)
 		git co $branch
 	}
+
+	if has 'hub'; then
+		mkpull-request() {
+			local baseBranch=$(git branch | cut -c 3-100 | $FILTER_TOOL)
+			hub pull-request -b $baseBranch
+		}
+	fi
 fi
 
 # --------------------------------------------- 
