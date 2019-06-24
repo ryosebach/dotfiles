@@ -19,6 +19,9 @@ if [ ! -z $1 ]; then
 	option="-v $1"	
 	if [ ! -z $2 ]; then
 		option="$option -v $2"
+		if [ ! -z $3 ]; then
+			option="$option -v $3"
+		fi
 	fi
 	LANG=en_US.UTF-8 date $option '+%a %b %d %T %Y +0900'
 else
