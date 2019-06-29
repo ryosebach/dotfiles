@@ -1,3 +1,5 @@
+source ~/.vim/.vimrc.keymap
+
 " indent
 set autoindent
 set tabstop=4
@@ -25,23 +27,6 @@ syntax on
 " インなんとかサーチを有効に
 set incsearch
 
-" インサートモードでC-jkでコード追加
-" inoremap <silent> <C-j> <Esc>$<Insert><RIGHT><Enter>
-" inoremap <silent> <C-k> <Esc><UP>$<Insert><RIGHT><Enter>
-inoremap <silent> <C-o> <Esc>$<Insert><RIGHT><Enter>
-              	
-
-" インサートモードでC-t/C-eで行の先頭/末尾へ移動
-inoremap <silent> <C-t> <Esc>^<Insert><RIGHT>
-inoremap <silent> <C-e> <Esc>$<Insert><RIGHT>
-"
-
-" jj/kkでインサートモードから抜ける
-inoremap <silent> jj <ESC>j
-inoremap <silent> kk <ESC>k
-
-" インサートモードでC-d C-dで行削除
-inoremap <silent> <C-d><C-d> <ESC>dd<Insert>
 
 let g:deoplete#enable_at_startup = 1
 let g:typescript_indent_disable = 1
