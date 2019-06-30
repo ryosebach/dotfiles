@@ -9,7 +9,7 @@ highlight CursorColumn ctermbg=Black
 
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
-set number
+set number 
 
 " ftpluginを読み込むようにする
 filetype plugin on
