@@ -1,0 +1,5 @@
+set main-view = id date:display=custom,format="%m-%d %H:%M" author:width=8 commit-title:graph=yes,refs=yes
+set split-view-height = 80%
+
+color	title-blur		black	white	bold
+
