@@ -6,7 +6,6 @@ e_arrow "brew cask application installing"
 
 ConfirmApp=(
 kap
-marp
 vlc
 insomnia
 spectacle
