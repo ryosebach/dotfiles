@@ -5,7 +5,6 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 e_arrow "brew cask application installing"
 
 ConfirmApp=(
-kap
 vlc
 insomnia
 spectacle
@@ -16,6 +15,7 @@ InstallApp=(
 hyperswitch
 docker
 alfred
+kap
 clipy
 java
 trailer
