@@ -16,6 +16,7 @@ hyperswitch
 docker
 alfred
 kap
+bartender
 clipy
 java
 trailer
