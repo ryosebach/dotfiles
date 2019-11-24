@@ -151,7 +151,7 @@ yes_or_no(){
 		yes)
 			return 0
 			;;
-		y) 
+		y)
 			return 0
 			;;
 		no)
@@ -194,7 +194,7 @@ export_github_info () {
 	export GITHUB_USERMAIL
 }
 
- 
+
 if [ -z "${FILTER_TOOL}" ]; then
 	FILTER_TOOL=$(available "fzf:peco"); export FILTER_TOOL
 fi
@@ -204,12 +204,12 @@ if [ -z "${GITHUB_USERNAME}" ]; then
 fi
 
 dotfiles_logo='
-       _       _     __  _  _  
-      | |     | |  / ._|(_)| |           
-    __| | ___ | |_ | |_  _ | |  ___  ___  
-   / _| |/ _ \| ,_||  _|| || | / _ \/ __| 
-  | (_| | (_) | |_ | |  | || ||  __/\__ \ 
-   \___/ \___/ \__||_|  |_||_| \___||___/ 
+       _       _     __  _  _
+      | |     | |  / ._|(_)| |
+    __| | ___ | |_ | |_  _ | |  ___  ___
+   / _| |/ _ \| ,_||  _|| || | / _ \/ __|
+  | (_| | (_) | |_ | |  | || ||  __/\__ \
+   \___/ \___/ \__||_|  |_||_| \___||___/
 '
 
 dotfiles_download() {
@@ -235,17 +235,17 @@ dotfiles_download() {
 	        local tarball="https://github.com/ryosebach/dotfiles/archive/master.tar.gz"
 	        if is_exists "curl"; then
 	            curl -L "$tarball"
-	
+
 	        elif is_exists "wget"; then
 	            wget -O - "$tarball"
-	
+
 	        fi | tar xvz
 	        if [ ! -d dotfiles-master ]; then
 	 #           log_fail "dotfiles-master: not found"
 	            exit 1
 	        fi
 	        command mv -f dotfiles-master "$DOTPATH"
-	
+
 	    else
 	        log_fail "curl or wget required"
 	        exit 1

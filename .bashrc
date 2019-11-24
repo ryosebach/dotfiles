@@ -1,5 +1,5 @@
 # .bashrc
-# --------------------------------------------- 
+# ---------------------------------------------
 # - https://github.com/ryosebach/dotfiles
 
 # loading some file
@@ -10,26 +10,26 @@ test -r ~/.dotfiles/etc/lib/git-completion.bash && . ~/.dotfiles/etc/lib/git-com
 # loading .bashrc for using os
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.bashrc
 
-# --------------------------------------------- 
+# ---------------------------------------------
 # Setting option fot GIT_PS1
 # https://gist.github.com/ryosebach/3217600f52dcae87d78961a1aa44a5b0
-# --------------------------------------------- 
+# ---------------------------------------------
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 
-# --------------------------------------------- 
+# ---------------------------------------------
 # Setting PS1
 # https://gist.github.com/ryosebach/1deee3855b7c8cec6e58970e4a1f5476
-# --------------------------------------------- 
+# ---------------------------------------------
 
 USER_ICON="(˙༥˙)"
-PS1='$(if [ $? = 0 ]; then 
-		echo \[\e[32m\]; 
-	else 
-		echo \[\e[31m\]; 
+PS1='$(if [ $? = 0 ]; then
+		echo \[\e[32m\];
+	else
+		echo \[\e[31m\];
 	fi)'
 PS1+=${USER_ICON}
 #PS1+='\[\e[0m\]@'
@@ -40,9 +40,9 @@ PS1+='\[\e[31m\]$(__git_ps1)'
 PS1+='\[\e[0m\] \n\$ '
 
 
-# --------------------------------------------- 
+# ---------------------------------------------
 # for golang
-# --------------------------------------------- 
+# ---------------------------------------------
 
 export GOPATH=~/.go
 export PATH=$GOPATH/bin:$PATH
@@ -50,9 +50,9 @@ if has 'ghq'; then
 	export GHQ_ROOT=`ghq root`
 fi
 
-# --------------------------------------------- 
+# ---------------------------------------------
 # alias field
-# --------------------------------------------- 
+# ---------------------------------------------
 
 if has 'nvim'; then
 	alias vi='nvim'
@@ -96,9 +96,9 @@ alias la='ls -la'
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="fg*:bg*:history*:cd*:ls:la:tig:g:vi:vim"
 
-# --------------------------------------------- 
-# for Interactive Filter Tools 
-# --------------------------------------------- 
+# ---------------------------------------------
+# for Interactive Filter Tools
+# ---------------------------------------------
 
 if [ -n "$FILTER_TOOL" ] ; then
 	create-project () {
@@ -121,7 +121,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 		fi
 	}
 	alias mkproj='create-project'
-	
+
 	filter-lscd () {
 		local dir="$(find . -maxdepth 1 -type d | sed -e 's;\./;;' | $FILTER_TOOL)"
 		if [ -n "$dir" ] ; then
@@ -137,7 +137,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 		fi
 	}
 	alias g='cd2repository'
-	
+
 	filter-and-ssh() {
 	    local host=$(grep 'Host ' ~/.ssh/config | awk '{print $2}' | $FILTER_TOOL)
 	    if [ -n "$host" ]; then
@@ -145,7 +145,7 @@ if [ -n "$FILTER_TOOL" ] ; then
 	        ssh -F ~/.ssh/config $host
 	    fi
 	}
-	
+
 	alias sshh='filter-and-ssh'
 
 	ssh-add-with-filter() {
@@ -179,12 +179,12 @@ if [ -n "$FILTER_TOOL" ] ; then
 	fi
 fi
 
-# --------------------------------------------- 
-# for peco 
-# --------------------------------------------- 
+# ---------------------------------------------
+# for peco
+# ---------------------------------------------
 
 if has 'peco'; then
-	
+
 	# search current directory
 	peco-find() {
 		local l=$(\find . -maxdepth 8 -a \! -regex '.*/\..*' | peco)
@@ -198,5 +198,5 @@ if has 'peco'; then
 	}
 	bind -x '"\C-uc": peco-find'
 	bind -x '"\C-ua": peco-find-all'
-	
+
 fi
