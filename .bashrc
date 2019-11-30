@@ -167,7 +167,8 @@ if [ -n "$FILTER_TOOL" ] ; then
 
 	gpl() {
 		local branch=$(git branch | cut -c 3-100 | $FILTER_TOOL)
-		local remote=$(git remote | $FILTER_TOOL)
+		local remotes=$(git remote)
+		local remote=$(pickApplicable "upstream:origin" "$remotes")
 		git pull $remote $branch
 	}
 

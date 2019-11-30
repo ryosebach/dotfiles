@@ -187,6 +187,23 @@ available () {
     return 1
 }
 
+pickApplicable () {
+    local x candidates
+    candidates="$1"
+    while [ -n "$candidates" ]
+    do
+        x=${candidates%%:*}
+        candidates=${candidates#*:}
+        if [[ $2 == *$x* ]]; then
+            echo "$x"
+            return 0
+        else
+            continue
+        fi
+    done
+    return 1
+}
+
 export_github_info () {
 	GITHUB_USERNAME=$(echo `git config --global --list | grep user.name | tr '=' '\n'` | awk '{print $2}')
 	GITHUB_USERMAIL=$(echo `git config --global --list | grep user.email | tr '=' '\n'` | awk '{print $2}')
