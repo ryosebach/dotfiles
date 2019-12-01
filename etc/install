@@ -187,6 +187,14 @@ available () {
     return 1
 }
 
+###
+# 指定した項目が含まれるかどうかを優先度の高い順に確認し、最初に該当したものを返す
+#
+# pickApplicable $1 $2
+# $1: 優先度順に検索項目を並べる
+# $2: 含むかどうかを検索する文章
+# pickApplicable 'one:two:three' 'four three five two' → 'three'
+###
 pickApplicable () {
     local x candidates
     candidates="$1"
