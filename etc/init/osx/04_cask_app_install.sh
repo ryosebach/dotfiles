@@ -31,7 +31,7 @@ the-unarchiver
 brew tap caskroom/versions
 
 for app in ${InstallApp[@]}; do
-  brew cask install $app
+  brew install --cask $app
 done
 
 for app in ${ConfirmApp[@]}; do
