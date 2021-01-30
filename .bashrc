@@ -45,7 +45,7 @@ PS1+='\[\e[0m\] \n\$ '
 # ---------------------------------------------
 
 export GOPATH=~/.go
-export PATH=$GOPATH/bin:$PATH
+export PATH=$GOPATH/bin:$HOME/bin:$PATH
 if has 'ghq'; then
 	export GHQ_ROOT=`ghq root`
 fi
