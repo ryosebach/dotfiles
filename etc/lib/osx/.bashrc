@@ -7,6 +7,7 @@ test -r $HOME/.tfenv/bin && export PATH=$HOME/.tfenv/bin:$PATH
 if has 'rbenv'; then
 	eval "$(rbenv init -)"
 fi
+test -r /opt/homebrew/bin && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ---------------------------------------------
 # date command
