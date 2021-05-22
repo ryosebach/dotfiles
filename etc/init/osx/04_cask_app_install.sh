@@ -6,7 +6,6 @@ e_arrow "brew cask application installing"
 
 ConfirmApp=(
 vlc
-insomnia
 spectacle
 intellij-idea
 )
@@ -15,6 +14,9 @@ InstallApp=(
 hyperswitch
 docker
 alfred
+authy
+notion
+karabiner-elements
 kap
 bartender
 clipy
@@ -24,8 +26,6 @@ visual-studio-code
 docker
 google-chrome
 google-japanese-ime
-google-chrome-canary
-station
 the-unarchiver
 )
 brew tap caskroom/versions
