@@ -1,8 +1,7 @@
 [core]
 	editor = vim -c \"set fenc=utf-8\"
 [ghq]
-	root = ~/dev/src
-	root = ~/.go/src
+	root=~/dev/src
 [user]
 	name = ryosebach
 	email = 15684002+ryosebach@users.noreply.github.com
@@ -17,5 +16,6 @@
 	typechange = status -s | awk '$1=="T"{print $2}' | xargs git checkout
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 	review = diff origin/master...
+	gone = "!f() { git fetch --prune; git branch -vv | grep \"gone]\" | awk \"{print \\$1}\" | xargs git branch -D; }; f"
 [fetch]
 	prune = true

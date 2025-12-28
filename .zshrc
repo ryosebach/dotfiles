@@ -8,27 +8,21 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 # loading .zshrc for using os
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc
 test -r $(brew --prefix asdf)/libexec/asdf.sh && . $(brew --prefix asdf)/libexec/asdf.sh
+eval "$(direnv hook zsh)"
 
 export PATH="$HOME/.asdf/shims:$PATH"
 
 # ---------------------------------------------
 # for golangs
 # ---------------------------------------------
-
-export GOPATH=~/.go
-export PATH=$GOPATH/bin:$HOME/bin:$PATH
+# Note: GOPATH is not needed with Go Modules (Go 1.11+)
+# GOBIN is removed to avoid conflicts in multi-platform builds
+# Go Modules default location: $HOME/go/bin
+export PATH=$HOME/go/bin:$HOME/bin:$PATH
 if has 'ghq'; then
 	export GHQ_ROOT=`ghq root`
 fi
 
-
-# Configure for Bedrock with Claude 3.7 Sonnet
-export CLAUDE_CODE_USE_BEDROCK=1
-#export ANTHROPIC_MODEL='us.anthropic.claude-3-7-sonnet-20250219-v1:0'
-export ANTHROPIC_MODEL='anthropic.claude-3-5-sonnet-20240620-v1:0'
-
-# Control prompt caching - set to 1 to disable (see note below)
-export DISABLE_PROMPT_CACHING=1
 
 # ---------------------------------------------
 # alias field
@@ -80,27 +74,6 @@ zstyle ':completion:*:(ssh|scp|rdp):*' users off
 # for Interactive Filter Tools
 # ---------------------------------------------
 
-if [ -n "$FILTER_TOOL" ] ; then
-	create-project () {
-		if [ ! -z $1 ]; then
-			local service=$(\ls -1 "$GHQ_ROOT" | $FILTER_TOOL)
-			if [ -n "$service" ]; then
-				local projFolder="$GHQ_ROOT/$service/$GITHUB_USERNAME/$1"
-				mkdir $projFolder
-				cd $projFolder
-				git init
-				gibo dump macos windows > .gitignore
-				sed -i '' '1s/^/######### generated from gibo ###########'\\$'\n''/' .gitignore
-				curl -sL raw.github.com/ryosebach/github_template/master/get_template.sh | bash
-				echo "created $projFolder"
-			else
-				echo "Please Select Service"
-			fi
-		else
-			echo "Please Input Project Name"
-		fi
-	}
-	alias mkproj='create-project'
 
 	filter-lscd () {
 		local dir="$(find . -maxdepth 1 -type d | sed -e 's;\./;;' | $FILTER_TOOL)"
@@ -152,12 +125,145 @@ if [ -n "$FILTER_TOOL" ] ; then
 		git pull $remote $branch
 	}
 
+	alias gwl='git worktree list'
+	alias gwa='git worktree add'
+	alias gwd='git worktree remove'
+	alias gwm='git worktree move'
+
+	# ブランチをfzfで選択してworktreeを作成
+	gwb() {
+		local branch=$(git branch -r | grep -v HEAD | sed "s/.*origin\///" | sed "s/^[[:space:]]*//" | fzf --height=40% --layout=reverse --cycle --border --prompt="Select branch: ")
+		if [[ -n "$branch" ]]; then
+			local name=$(echo "$branch" | sed "s/\//-/g")
+			git worktree add "../$name" "$branch"
+		fi
+	}
+
+	alias gwdel='git worktree remove $(git worktree list | grep -v "$(git rev-parse --show-toplevel)" | fzf --height=40% --layout=reverse --border --prompt="Delete worktree: " | awk "{print \$1}")'
+
+	gwinfo() {
+		local worktree=$(git worktree list --porcelain | awk "
+			/^worktree/ { path=\$2 }
+			/^branch/ { branch=\$2 }
+			/^HEAD/ {
+				if (branch) print path \" [\" branch \"]\"
+				else print path \" [\" substr(\$2,1,8) \"]\"
+			}
+		" | fzf --height=40% --layout=reverse --border --prompt="Worktree info: ")
+
+		if [[ -n "$worktree" ]]; then
+			local path=$(echo "$worktree" | awk "{print \$1}")
+			echo "=== Worktree: $path ==="
+			echo "Files changed:"
+			(cd "$path" && git status --porcelain | head -10)
+			echo "\nRecent commits:"
+			(cd "$path" && git log --oneline -5)
+		fi
+	}
+
 	if has 'hub'; then
 		mkpull-request() {
 			local baseBranch=$(git branch | cut -c 3-100 | $FILTER_TOOL)
 			hub pull-request -b $baseBranch
 		}
 	fi
+fi
+
+# ---------------------------------------------
+# for gwq
+# ---------------------------------------------
+
+if has 'gwq'; then
+	# worktree間でファイル移動（dstはgwqで選択）
+	wtmv() {
+		local src="$1"
+		local dst_rel="$2"   # 省略可。省略時は同じ相対パスで置く
+
+		if [ -z "$src" ]; then
+			echo "Usage: wtmv <src> [dst_rel]"
+			echo "  dst_rel omitted -> keep same relative path in destination worktree"
+			return 1
+		fi
+		if [ ! -e "$src" ]; then
+			echo "Source not found: $src"
+			return 1
+		fi
+
+		# src側 worktree root と、rootからの相対パスを作る
+		local src_root src_abs src_rel
+		src_root="$(git rev-parse --show-toplevel)" || return 1
+		src_abs="$(cd "$(dirname "$src")" && pwd)/$(basename "$src")"
+		src_rel="${src_abs#"$src_root"/}"
+
+		# dst worktree を gwq で選ぶ（返り値はパス）
+		local dst_root
+		dst_root="$(gwq get)" || return 1
+		# "~" を返す設定があり得るので展開
+		dst_root="$(eval echo "$dst_root")"
+
+		# dst 側に置く相対パス（省略なら src と同じ）
+		[ -z "$dst_rel" ] && dst_rel="$src_rel"
+
+		# 実移動
+		mkdir -p "$dst_root/$(dirname "$dst_rel")" || return 1
+		mv "$src_abs" "$dst_root/$dst_rel" || return 1
+
+		# ★重要：worktreeごとに index が別なので、それぞれのworktreeで実行する
+		# git -C "$dst_root" add "$dst_rel" || return 1
+		# git -C "$src_root" rm --cached "$src_rel" >/dev/null 2>&1 || true
+
+		echo "Moved:"
+		echo "  from: $src_root/$src_rel"
+		echo "    to: $dst_root/$dst_rel"
+		echo ""
+		echo "Next:"
+		echo "  (src) git -C \"$src_root\" status"
+		echo "  (dst) git -C \"$dst_root\" status"
+	}
+
+	# worktree間でファイルコピー（dstはgwqで選択 / ステージしない）
+	wtcp() {
+		local src="$1"
+		local dst_rel="$2"   # 省略可。省略時は同じ相対パスで置く
+
+		if [ -z "$src" ]; then
+			echo "Usage: wtcp <src> [dst_rel]"
+			echo "  dst_rel omitted -> keep same relative path in destination worktree"
+			return 1
+		fi
+		if [ ! -e "$src" ]; then
+			echo "Source not found: $src"
+			return 1
+		fi
+
+		# src側 worktree root と rootからの相対パス
+		local src_root src_abs src_rel
+		src_root="$(git rev-parse --show-toplevel)" || return 1
+		src_abs="$(cd "$(dirname "$src")" && pwd)/$(basename "$src")"
+		src_rel="${src_abs#"$src_root"/}"
+
+		# dst worktree を gwq で選ぶ
+		local dst_root
+		dst_root="$(gwq get)" || return 1
+		dst_root="$(eval echo "$dst_root")"  # "~" 展開
+
+		# dst 側に置く相対パス（省略なら src と同じ）
+		[ -z "$dst_rel" ] && dst_rel="$src_rel"
+
+		# 上書き防止
+		if [ -e "$dst_root/$dst_rel" ]; then
+			echo "Destination already exists: $dst_root/$dst_rel"
+			return 1
+		fi
+
+		mkdir -p "$dst_root/$(dirname "$dst_rel")" || return 1
+		cp -a "$src_abs" "$dst_root/$dst_rel" || return 1
+
+		echo "Copied:"
+		echo "  from: $src_root/$src_rel"
+		echo "    to: $dst_root/$dst_rel"
+		echo "Note: not staged"
+	}
 fi
 
 # ---------------------------------------------

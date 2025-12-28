@@ -11,11 +11,11 @@ test -r /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completi
 subDate () {
 option=''
 if [ ! -z $1 ]; then
-	option="-v $1"
+	option="-v$1"
 	if [ ! -z $2 ]; then
-		option="$option -v $2"
+		option="$option -v$2"
 		if [ ! -z $3 ]; then
-			option="$option -v $3"
+			option="$option -v$3"
 		fi
 	fi
 	LANG=en_US.UTF-8 date $option '+%a %b %d %T %Y +0900'
@@ -57,7 +57,7 @@ alias sorry-desktop='defaults delete com.apple.finder CreateDesktop; killall Fin
 if [ -n "$FILTER_TOOL" ] ; then
 	make-unity-proj() {
 		if [ $# -ge 1 ] ; then
-			local service=$(\ls -1 $GOPATH/src | $FILTER_TOOL)
+			local service=$(\ls -1 $(ghq root) | $FILTER_TOOL)
 			if [ -z "$service" ] ; then
 				return
 			fi

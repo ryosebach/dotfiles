@@ -43,9 +43,9 @@ PS1+='\[\e[0m\] \n\$ '
 # ---------------------------------------------
 # for golang
 # ---------------------------------------------
-
-export GOPATH=~/.go
-export PATH=$GOPATH/bin:$HOME/bin:$PATH
+# Note: GOPATH is not needed with Go Modules (Go 1.11+)
+# Go Modules default location: $HOME/go/bin
+export PATH=$HOME/go/bin:$HOME/bin:$PATH
 if has 'ghq'; then
 	export GHQ_ROOT=`ghq root`
 fi
