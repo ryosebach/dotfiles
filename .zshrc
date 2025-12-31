@@ -75,6 +75,7 @@ zstyle ':completion:*:(ssh|scp|rdp):*' users off
 # ---------------------------------------------
 
 
+if [ -n "$FILTER_TOOL" ] ; then
 	filter-lscd () {
 		local dir="$(find . -maxdepth 1 -type d | sed -e 's;\./;;' | $FILTER_TOOL)"
 		if [ -n "$dir" ] ; then
