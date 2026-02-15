@@ -16,6 +16,9 @@
 	typechange = status -s | awk '$1=="T"{print $2}' | xargs git checkout
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
 	review = diff origin/master...
-	gone = "!f() { git fetch --prune; git branch -vv | grep \"gone]\" | awk \"{print \\$1}\" | xargs git branch -D; }; f"
+	# Old gone: worktree 対応前
+	# gone = "!f() { git fetch --prune; git branch -vv | grep \"gone]\" | awk \"{print \\$1}\" | xargs git branch -D; }; f"
+	# New gone: worktree も削除、変更があればスキップして差分表示
+	gone = "!f() { git fetch --prune; git branch -vv | grep \"gone]\" | while read line; do wt_path=$(echo \"$line\" | grep -o \"([^)]*)\" | tr -d \"()\"); branch=$(echo \"$line\" | sed \"s/^[+* ]*//\" | awk \"{print \\$1}\"); if [ -n \"$wt_path\" ] && [ -d \"$wt_path\" ]; then echo \"Removing worktree: $wt_path\"; if ! git worktree remove \"$wt_path\" 2>/dev/null; then echo \"  -> Skipped. Uncommitted changes:\"; git -C \"$wt_path\" status --short; echo \"\"; continue; fi; fi; echo \"Deleting branch: $branch\"; git branch -D \"$branch\" 2>/dev/null || true; done; }; f"
 [fetch]
 	prune = true
