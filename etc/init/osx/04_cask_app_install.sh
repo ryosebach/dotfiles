@@ -5,27 +5,11 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 e_arrow "brew cask application installing"
 
 ConfirmApp=(
-vlc
-spectacle
-intellij-idea
+java
+notion
 )
 
 InstallApp=(
-hyperswitch
-docker
-alfred
-authy
-notion
-karabiner-elements
-kap
-bartender
-clipy
-java
-trailer
-visual-studio-code
-docker
-google-chrome
-google-japanese-ime
 the-unarchiver
 )
 brew tap caskroom/versions

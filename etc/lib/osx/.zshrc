@@ -1,6 +1,8 @@
 test -r /opt/homebrew/bin && eval "$(/opt/homebrew/bin/brew shellenv)"
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install
 
+export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
+
 test -r /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc && . /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 test -r /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc && . /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 

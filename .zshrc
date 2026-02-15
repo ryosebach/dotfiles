@@ -8,7 +8,6 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 # loading .zshrc for using os
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc
 test -r $(brew --prefix asdf)/libexec/asdf.sh && . $(brew --prefix asdf)/libexec/asdf.sh
-eval "$(direnv hook zsh)"
 
 export PATH="$HOME/.asdf/shims:$PATH"
 
@@ -27,6 +26,18 @@ fi
 # ---------------------------------------------
 # alias field
 # ---------------------------------------------
+
+if has 'claude'; then
+	alias c='claude'
+fi
+
+if has 'starship'; then
+	eval "$(starship init zsh)"
+fi
+
+if has 'direnv'; then
+	eval "$(direnv hook zsh)"
+fi
 
 if has 'nvim'; then
 	alias vi='nvim'

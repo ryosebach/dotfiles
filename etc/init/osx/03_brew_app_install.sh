@@ -4,21 +4,13 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 e_arrow "brew application installing"
 
 BrewApp=(
-the_platinum_searcher
-go
-peco
+fzf
+gh
 ghq
+d-kuro/tap/gwq
 tig
-gibo
-wget
 nkf
-ghostscript
-hub
 tree
-graphviz
-neovim
-python
-python@2
 )
 
 for app in ${BrewApp[@]}; do
