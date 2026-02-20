@@ -18,6 +18,8 @@
       "Bash(npm view:*)",
       "Bash(npm run lint*)",
       "Bash(npm run test*)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm test*)",
       "Bash(docker compose:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
@@ -28,6 +30,9 @@
       "Bash(git diff:*)",
       "Bash(git fetch:*)",
       "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "Bash(gh run view *)",
+      "Bash(gh api **/comments *)",
       "Bash(go build:*)",
       "Bash(go env *)",
       "Bash(go test *)",
@@ -83,5 +88,6 @@
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
-  }
+  },
+  "effortLevel": "medium"
 }
