@@ -84,7 +84,7 @@
       "Bash(git push -f*)",
       "Bash(git rebase *)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true
