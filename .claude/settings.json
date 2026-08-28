@@ -100,8 +100,35 @@
     "disableBypassPermissionsMode": "disable"
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": false,
+    "skill-creator@claude-plugins-official": true,
+    "gopls-daemon@local": true,
+    "notion@claude-plugins-official": true,
+    "warp@claude-code-warp": true,
+    "codex@openai-codex": true
   },
-  "autoUpdatesChannel": "latest"
+  "extraKnownMarketplaces": {
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "advisorModel": "opus",
+  "autoUpdatesChannel": "latest",
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark-daltonized",
+  "verbose": false,
+  "remoteControlAtStartup": false,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "useAutoModeDuringPlan": true
 }
