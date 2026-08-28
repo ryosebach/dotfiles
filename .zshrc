@@ -7,8 +7,17 @@ test -r ~/.fzf.zsh && . ~/.fzf.zsh
 test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 # loading .zshrc for using os
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc
-
+#test -r $(brew --prefix asdf)/libexec/asdf.sh && . $(brew --prefix asdf)/libexec/asdf.sh
+#export PATH="$HOME/.asdf/shims:$PATH"
+eval "$(mise activate zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+
+# ---------------------------------------------
+# for Android development
+# ---------------------------------------------
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
 
 # ---------------------------------------------
 # for golangs
@@ -20,6 +29,9 @@ export PATH=$HOME/go/bin:$HOME/bin:$PATH
 if has 'ghq'; then
 	export GHQ_ROOT=`ghq root`
 fi
+
+export CLAUDE_CODE_EFFORT_LEVEL=max
+export CLAUDE_CODE_NO_FLICKER=1
 
 
 # ---------------------------------------------
@@ -301,4 +313,3 @@ fi
 
 # Added by Windsurf
 export PATH="/Users/ryosei/.codeium/windsurf/bin:$PATH"
-eval "$(mise activate zsh)"

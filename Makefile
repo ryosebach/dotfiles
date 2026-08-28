@@ -29,9 +29,10 @@ deploy: claude ## Create symlinks to home directory
 
 CLAUDE_CONFIGS := settings.json
 
-claude: ## Link Claude Code config files to ~/.claude/
+claude: ## Link Claude Code config files to ~/.claude/ and ~/CLAUDE.md
 	@mkdir -p $(HOME)/.claude
 	@$(foreach val, $(CLAUDE_CONFIGS), ln -sfnv $(DOTPATH)/.claude/$(val) $(HOME)/.claude/$(val);)
+	@ln -sfnv $(DOTPATH)/CLAUDE.md $(HOME)/CLAUDE.md
 
 update: ## Fetch changes for this repo
 	git pull origin master
