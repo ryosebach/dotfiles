@@ -9,8 +9,9 @@ test -r ~/.dotfiles/etc/install && . ~/.dotfiles/etc/install && os_detect
 test -r ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc && . ~/.dotfiles/etc/lib/"$PLATFORM"/.zshrc
 #test -r $(brew --prefix asdf)/libexec/asdf.sh && . $(brew --prefix asdf)/libexec/asdf.sh
 #export PATH="$HOME/.asdf/shims:$PATH"
-eval "$(mise activate zsh)"
+# NOTE: mise lives in ~/.local/bin, so this PATH export must come BEFORE mise activate
 export PATH="$HOME/.local/bin:$PATH"
+eval "$(mise activate zsh)"
 
 # ---------------------------------------------
 # for Android development
