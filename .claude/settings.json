@@ -70,16 +70,14 @@
       "Read(~/.local/**)"
     ],
     "ask": [
-      "Bash(rm *)",
       "Bash(chmod *)",
-      "Bash(git merge *)",
       "Bash(git push -f*)",
-      "Bash(git rebase *)",
       "Bash(nc *)"
     ],
     "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
   },
+  "model": "opus[1m]",
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": false,
     "skill-creator@claude-plugins-official": true,
@@ -87,7 +85,8 @@
     "notion@claude-plugins-official": true,
     "figma@claude-plugins-official": true,
     "warp@claude-code-warp": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "crit@crit": true
   },
   "extraKnownMarketplaces": {
     "claude-code-warp": {
@@ -100,6 +99,12 @@
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "crit": {
+      "source": {
+        "source": "github",
+        "repo": "tomasz-tomczyk/crit"
       }
     }
   },
