@@ -15,7 +15,7 @@
 	ci = commit
 	typechange = status -s | awk '$1=="T"{print $2}' | xargs git checkout
 	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
-	review = diff origin/master...
+	review = "!f() { git diff $(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || echo origin/main)...; }; f"
 	# Old gone: worktree 対応前
 	# gone = "!f() { git fetch --prune; git branch -vv | grep \"gone]\" | awk \"{print \\$1}\" | xargs git branch -D; }; f"
 	# New gone: worktree も削除、変更があればスキップして差分表示

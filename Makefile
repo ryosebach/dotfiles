@@ -35,7 +35,7 @@ claude: ## Link Claude Code config files to ~/.claude/ and ~/CLAUDE.md
 	@ln -sfnv $(DOTPATH)/CLAUDE.md $(HOME)/CLAUDE.md
 
 update: ## Fetch changes for this repo
-	git pull origin master
+	git pull origin main
 
 gitconfig: ## Setup git user config
 	@bash $(DOTPATH)/etc/init/common/01_set_gitconfig.sh
